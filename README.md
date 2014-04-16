@@ -1,4 +1,6 @@
-planets
+Planets
 =======
 
-A 3D scene with planets using Luvia
+A 3D scene with planets using Luvia.
+
+![ScreenShot](https://raw.githubusercontent.com/yuripourre/planets/master/screenshot.png)
