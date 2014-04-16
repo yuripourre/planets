@@ -1,0 +1,10 @@
+# Pre-Compiled Files #
+bin/
+!bin/assets/*
+
+# Automatic Generated Files #
+*.applet
+
+# Package Files #
+*.war
+*.ear

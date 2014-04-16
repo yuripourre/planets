@@ -1,0 +1,42 @@
+------------------CLIENTE-----------------
+
+Autenticação Online - sem criptografia (100%)
+
+Sistema Multilíngue (100%)
+
+Registro de Novos Usuários (99%)
+- Falta confirmar senha dinamico
+
+Barra de Configurações (90%)
+
+Avatar 2D (98%)
+
+Barra Mensagens/Feed (85%)
+|
+|(GlobalEffects Feed)
+|- Usuário recebe mensagens globais na tela (tipo warning do Tibia) e as mesmas ficam armazenadas no feed (enquanto o usuário estiver online).
+
+//Removido
+Barra de Amigos Mystic (35%)
+| 
+|--Pedido de Amizade 
+|--Lista de Pedidos 
+|--Troca de Mensagem por texto 
+
+Sistema de salas (31%)
+| 
+|--Usuário pode criar salas 
+|--Usuário pode ver salas criadas por amigos 
+
+//Removido
+Theme apenas muda cor (0%) 
+
+Jogos Iniciais(0%):
+- 1 Jogo Clássico
+
+//Removido
+- 2 Jogos Educativo Fácil
+- 1 Jogo Educativo Difícil
+
+------------------SERVIDOR-----------------
+MONGODB
