@@ -1,6 +1,9 @@
 # Pre-Compiled Files #
-bin/
-!bin/assets/*
+!bin/
+bin/*
+
+!bin/assets/
+
 
 # Automatic Generated Files #
 *.applet
