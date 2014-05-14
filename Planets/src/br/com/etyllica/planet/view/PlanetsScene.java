@@ -15,6 +15,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.planet.model.Astro;
+import br.com.etyllica.theme.plurality.Selection;
 import br.com.luvia.core.ApplicationGL;
 import br.com.luvia.linear.Point3D;
 import br.com.luvia.util.Camera;
@@ -38,6 +39,8 @@ public class PlanetsScene extends ApplicationGL {
 	
 	private double zoomStep = 0.2;
 	
+	private Selection selection;
+	
 	public PlanetsScene(int w, int h) {
 		super(w, h);
 		
@@ -48,6 +51,10 @@ public class PlanetsScene extends ApplicationGL {
 	public void load() {
 
 		System.out.println("Load");
+		
+		int size = 100;
+
+		selection = new Selection(w/2-size/2, h/2-size/2, size, size);
 		
 		loading = 88;
 		loadingPhrase = "Loading Models...";
@@ -163,9 +170,9 @@ public class PlanetsScene extends ApplicationGL {
 		
 		g.writeX(110, currentPlanet.getName());
 
-		int size = 100;
-		//g.setColor(Color.BLUE);
-		g.drawRect(w/2-size/2, h/2-size/2, size, size);
+		selection.draw(g);
+		
+		g.setColor(Color.WHITE);
 	
 	}
 	
