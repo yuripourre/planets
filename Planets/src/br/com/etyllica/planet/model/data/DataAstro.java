@@ -1,6 +1,6 @@
-package br.com.etyllica.planet.model.planet;
+package br.com.etyllica.planet.model.data;
 
-public abstract class Planet {
+public abstract class DataAstro {
 
 	//Mass in kg
 	protected String mass;
@@ -11,7 +11,7 @@ public abstract class Planet {
 	//Distance from the Sun
 	protected String distance;
 	
-	public Planet() {
+	public DataAstro() {
 		super();
 	}
 

@@ -1,6 +1,6 @@
-package br.com.etyllica.planet.model.planet;
+package br.com.etyllica.planet.model.data;
 
-public class Saturn extends Planet {
+public class Saturn extends DataAstro {
 
  	public Saturn() {
  		super();

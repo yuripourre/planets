@@ -1,6 +1,6 @@
-package br.com.etyllica.planet.model.planet;
+package br.com.etyllica.planet.model.data;
 
-public class Jupiter extends Planet {
+public class Jupiter extends DataAstro {
 
 	public Jupiter() {
 	 		

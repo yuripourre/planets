@@ -1,6 +1,6 @@
-package br.com.etyllica.planet.model.planet;
+package br.com.etyllica.planet.model.data;
 
-public class Mercury extends Planet {
+public class Mercury extends DataAstro {
 
  	public Mercury() {
  		super();

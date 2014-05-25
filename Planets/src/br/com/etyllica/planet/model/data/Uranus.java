@@ -1,6 +1,6 @@
-package br.com.etyllica.planet.model.planet;
+package br.com.etyllica.planet.model.data;
 
-public class Uranus extends Planet {
+public class Uranus extends DataAstro {
 
 	public Uranus() {
 	 		

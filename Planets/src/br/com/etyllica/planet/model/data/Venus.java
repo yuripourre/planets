@@ -1,6 +1,6 @@
-package br.com.etyllica.planet.model.planet;
+package br.com.etyllica.planet.model.data;
 
-public class Venus extends Planet{
+public class Venus extends DataAstro{
 	
 	public Venus() {
 		 		

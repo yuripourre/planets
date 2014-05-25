@@ -1,6 +1,6 @@
-package br.com.etyllica.planet.model.planet;
+package br.com.etyllica.planet.model.data;
 
-public class Mars extends Planet {
+public class Mars extends DataAstro {
 
 	public Mars() {
 	 		

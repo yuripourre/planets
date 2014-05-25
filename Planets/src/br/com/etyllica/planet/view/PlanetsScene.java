@@ -2,6 +2,7 @@ package br.com.etyllica.planet.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,18 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.planet.model.Astro;
+import br.com.etyllica.gui.Panel;
+import br.com.etyllica.planet.model.VisualAstro;
+import br.com.etyllica.planet.model.data.Earth;
+import br.com.etyllica.planet.model.data.Jupiter;
+import br.com.etyllica.planet.model.data.Mars;
+import br.com.etyllica.planet.model.data.Mercury;
+import br.com.etyllica.planet.model.data.Neptune;
+import br.com.etyllica.planet.model.data.Pluto;
+import br.com.etyllica.planet.model.data.Saturn;
+import br.com.etyllica.planet.model.data.Uranus;
+import br.com.etyllica.planet.model.data.Venus;
+import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.plurality.Selection;
 import br.com.etyllica.theme.plurality.TitleArrow;
 import br.com.luvia.core.ApplicationGL;
@@ -24,14 +36,12 @@ import br.com.luvia.linear.Point3D;
 import br.com.luvia.util.Camera;
 
 public class PlanetsScene extends ApplicationGL {
-	
-	private Font orbitron;
-	
-	private List<Astro> planets = new ArrayList<Astro>();
+		
+	private List<VisualAstro> planets = new ArrayList<VisualAstro>();
 	
 	private int currentPlanetIndex = 0;
 	
-	private Astro currentPlanet = null;
+	private VisualAstro currentPlanet = null;
 		
 	private float mx = 0;
 	private float my = 0;
@@ -44,9 +54,15 @@ public class PlanetsScene extends ApplicationGL {
 	
 	private double zoomStep = 0.2;
 	
+	
+	//UI
+	private Font orbitron;
+	
 	private TitleArrow titleArrow;
 	
 	private Selection selection;
+	
+	private Panel dataPanel;
 	
 	public PlanetsScene(int w, int h) {
 		super(w, h);
@@ -68,6 +84,9 @@ public class PlanetsScene extends ApplicationGL {
 		
 		titleArrow = new TitleArrow(w/2-titleW/2, 90, titleW, 60);
 		
+		ThemeManager.getInstance().getTheme().setPanelColor(new Color(0xff, 0xff, 0xff, 0x80));
+		
+		dataPanel = new Panel(0, 75, 400, 160);
 		
 		loading = 88;
 		loadingPhrase = "Loading Font...";
@@ -101,41 +120,50 @@ public class PlanetsScene extends ApplicationGL {
 	
 	private void loadPlanets() {
 		
-		Astro mercury = new Astro("Mercúrio", 0.1516, "mercurymap.jpg"); //1,516 miles
+		VisualAstro mercury = new VisualAstro("Mercúrio", 0.1516, "mercurymap.jpg"); //1,516 miles
 		
 		mercury.setX(3.598);//35,980,000 miles
+		mercury.setData(new Mercury());
 		
-		Astro venus = new Astro("Vênus", 0.3760, "venusmap.jpg"); //3,760 miles
+		VisualAstro venus = new VisualAstro("Vênus", 0.3760, "venusmap.jpg"); //3,760 miles
 		
 		venus.setX(6.7240);//67,240,000 miles miles
+		venus.setData(new Venus());
 		
-		Astro earth = new Astro("Terra", 0.3959, "earthmap1k.jpg"); //3,959 miles
+		VisualAstro earth = new VisualAstro("Terra", 0.3959, "earthmap1k.jpg"); //3,959 miles
 		
 		earth.setX(9.296);//92,960,000 miles
+		earth.setData(new Earth());
 		
-		Astro mars = new Astro("Marte", 0.2106, "mars_1k_color.jpg"); //2,106 miles
+		VisualAstro mars = new VisualAstro("Marte", 0.2106, "mars_1k_color.jpg"); //2,106 miles
 
 		mars.setX(14.16);//141,600,000 miles
+		mars.setData(new Mars());
 		
-		Astro jupiter = new Astro("Júpiter", 4.3441, "jupitermap.jpg"); //43,441 miles
+		VisualAstro jupiter = new VisualAstro("Júpiter", 4.3441, "jupitermap.jpg"); //43,441 miles
 		
 		jupiter.setX(48.38);//483,800,000 miles
+		jupiter.setData(new Jupiter());
 		
-		Astro saturn = new Astro("Saturno", 3.6184, "saturnmap.jpg"); //36,184 miles
+		VisualAstro saturn = new VisualAstro("Saturno", 3.6184, "saturnmap.jpg"); //36,184 miles
 		
 		saturn.setX(89.07);//890,700,000 miles
+		saturn.setData(new Saturn());
 		
-		Astro uranus = new Astro("Urano", 1.5759, "uranusmap.jpg"); //15,759 miles
+		VisualAstro uranus = new VisualAstro("Urano", 1.5759, "uranusmap.jpg"); //15,759 miles
 		
 		uranus.setX(187.7);//1,787,000,000 miles
+		uranus.setData(new Uranus());
 		
-		Astro neptune = new Astro("Netuno", 1.5299, "neptunemap.jpg");//15,299 miles
+		VisualAstro neptune = new VisualAstro("Netuno", 1.5299, "neptunemap.jpg");//15,299 miles
 		
 		neptune.setX(279.8);//2,798,000,000 miles
+		neptune.setData(new Neptune());
 		
-		Astro pluto = new Astro("Plutão", 0.0715, "plutomap1k.jpg");//715 miles
+		VisualAstro pluto = new VisualAstro("Plutão", 0.0715, "plutomap1k.jpg");//715 miles
 		
 		pluto.setX(367.0);//3,670,000,000 miles
+		pluto.setData(new Pluto());
 		
 		planets.add(pluto);
 		planets.add(neptune);
@@ -172,7 +200,7 @@ public class PlanetsScene extends ApplicationGL {
 						
 		GLU glu = new GLU();
 		
-		for(Astro astro: planets) {
+		for(VisualAstro astro: planets) {
 						
 			astro.draw(gl, glu);
 		}
@@ -186,19 +214,45 @@ public class PlanetsScene extends ApplicationGL {
 
 		g.setFont(orbitron);
 		
-		g.setFontSize(22f);
-		g.setColor(Color.WHITE);
-		g.writeX(50, "Press Right Arrow or Left Arrow to change the target");
-		
 		g.setFontSize(28f);
 		g.write(currentPlanet.getName(), titleArrow);
 		
+		g.setFontSize(22f);
+		g.setColor(Color.WHITE);
+		g.writeX(50, "Press Right Arrow or Left Arrow to change the target");
+				
 		titleArrow.draw(g);
 		
-		selection.draw(g);	
+		selection.draw(g);
+		
+		dataPanel.draw(g);
+		
+		drawData(g);
 		
 		g.setColor(Color.WHITE);
 	
+	}
+	
+	private void drawData(Graphic g) {
+		
+		g.setFontSize(22f);
+		
+		g.setColor(Color.BLACK);
+		g.drawString("Mass (kg): ", 10, 120);
+		
+		int length = currentPlanet.getData().getMass().length();
+		
+		String mass = currentPlanet.getData().getMass().substring(0, length-2);
+		String exponent = currentPlanet.getData().getMass().substring(length-2, length);
+		
+		g.drawStringExponent(mass, exponent, 210, 120);
+		
+		g.drawString("Radius (miles): ", 10, 150);
+		g.drawString(currentPlanet.getData().getRadius(), 210, 150);
+		
+		g.drawString("Distance (miles): ", 10, 180);
+		g.drawString(currentPlanet.getData().getDistance(), 210, 180);
+		
 	}
 	
 	@Override
@@ -278,7 +332,7 @@ public class PlanetsScene extends ApplicationGL {
 		
 		zoom+=zoomStep;
 		
-		for(Astro astro: planets) {
+		for(VisualAstro astro: planets) {
 			
 			astro.setRadius((astro.getRadius()/oldZoom)*zoom);
 			
@@ -296,7 +350,7 @@ public class PlanetsScene extends ApplicationGL {
 			
 			zoom-=zoomStep;
 			
-			for(Astro astro: planets) {
+			for(VisualAstro astro: planets) {
 				
 				astro.setRadius((astro.getRadius()/oldZoom)*zoom);
 				
