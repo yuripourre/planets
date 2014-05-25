@@ -1,6 +1,7 @@
 package br.com.etyllica.planet.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,17 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
+import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.planet.model.Astro;
 import br.com.etyllica.theme.plurality.Selection;
+import br.com.etyllica.theme.plurality.TitleArrow;
 import br.com.luvia.core.ApplicationGL;
 import br.com.luvia.linear.Point3D;
 import br.com.luvia.util.Camera;
 
 public class PlanetsScene extends ApplicationGL {
+	
+	private Font orbitron;
 	
 	private List<Astro> planets = new ArrayList<Astro>();
 	
@@ -39,12 +44,15 @@ public class PlanetsScene extends ApplicationGL {
 	
 	private double zoomStep = 0.2;
 	
+	private TitleArrow titleArrow;
+	
 	private Selection selection;
 	
 	public PlanetsScene(int w, int h) {
 		super(w, h);
 		
 		camera = new Camera(0, 2, -5);
+		
 	}
 	
 	@Override
@@ -56,11 +64,14 @@ public class PlanetsScene extends ApplicationGL {
 
 		selection = new Selection(w/2-size/2, h/2-size/2, size, size);
 		
+		int titleW = 200;
+		
+		titleArrow = new TitleArrow(w/2-titleW/2, 90, titleW, 60);
+		
+		
 		loading = 88;
-		loadingPhrase = "Loading Models...";
-				
-		loading = 99;		
-		loadingPhrase = "Loading Textures...";
+		loadingPhrase = "Loading Font...";
+		orbitron = FontLoader.getInstance().loadFont("Orbitron Medium.ttf");		
 		
 		loading = 100;
 
@@ -69,6 +80,14 @@ public class PlanetsScene extends ApplicationGL {
 
 	@Override
 	public void init(GLAutoDrawable drawable) {
+		
+		GL2 gl = drawable.getGL().getGL2();
+				
+		gl.glHint( GL.GL_LINE_SMOOTH_HINT, GL.GL_NICEST ); 
+		gl.glHint( GL2.GL_POLYGON_SMOOTH_HINT, GL.GL_NICEST );
+		gl.glEnable( GL.GL_LINE_SMOOTH ); 
+		gl.glEnable( GL2.GL_POLYGON_SMOOTH ); 
+		gl.glEnable( GL.GL_MULTISAMPLE );
 		
 		loadingPhrase = "Loading 3d stuff...";
 				
@@ -165,12 +184,18 @@ public class PlanetsScene extends ApplicationGL {
 	@Override
 	public void draw(Graphic g) {
 
+		g.setFont(orbitron);
+		
+		g.setFontSize(22f);
 		g.setColor(Color.WHITE);
 		g.writeX(50, "Press Right Arrow or Left Arrow to change the target");
 		
-		g.writeX(110, currentPlanet.getName());
-
-		selection.draw(g);
+		g.setFontSize(28f);
+		g.write(currentPlanet.getName(), titleArrow);
+		
+		titleArrow.draw(g);
+		
+		selection.draw(g);	
 		
 		g.setColor(Color.WHITE);
 	
