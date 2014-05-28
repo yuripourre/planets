@@ -3,4 +3,4 @@ Planets
 
 A 3D scene with planets using Luvia.
 
-![ScreenShot](https://raw.githubusercontent.com/yuripourre/planets/master/screenshot.png)
+![ScreenShot](https://raw.githubusercontent.com/yuripourre/planets/master/screenshots/screenshot.png)
