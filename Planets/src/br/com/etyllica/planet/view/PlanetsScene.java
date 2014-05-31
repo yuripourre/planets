@@ -28,6 +28,7 @@ import br.com.etyllica.planet.model.data.Uranus;
 import br.com.etyllica.planet.model.data.Venus;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.plurality.LeftPanel;
+import br.com.etyllica.theme.plurality.RightPanel;
 import br.com.etyllica.theme.plurality.Selection;
 import br.com.etyllica.theme.plurality.TitleArrow;
 import br.com.etyllica.util.SVGColor;
@@ -69,6 +70,8 @@ public class PlanetsScene extends ApplicationGL {
 	
 	private LeftPanel dataPanel;
 	
+	private RightPanel quizPanel;
+	
 	public PlanetsScene(int w, int h) {
 		super(w, h);
 		
@@ -82,6 +85,10 @@ public class PlanetsScene extends ApplicationGL {
 		System.out.println("Load");
 		
 		dataPanel = new LeftPanel(10, 55, 410, 230);
+		
+		int panelW = 300;
+		
+		quizPanel = new RightPanel(w-panelW-10, 60, panelW, h-60-30);
 		
 		int size = 100;
 
@@ -172,7 +179,7 @@ public class PlanetsScene extends ApplicationGL {
 		
 		sun = new VisualAstro("Sun", 43.2450, "sunmap.jpg");//432,450 miles
 		
-		sun.setX(-43);		
+		sun.setX(-sun.getRadius());
 		
 		//planets.add(sun);
 		
@@ -242,6 +249,8 @@ public class PlanetsScene extends ApplicationGL {
 		selection.draw(g);
 		
 		dataPanel.draw(g);
+		
+		quizPanel.draw(g);
 		
 		drawData(g);
 		
