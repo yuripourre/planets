@@ -11,7 +11,7 @@ public class Earth extends DataAstro {
  		
  		radius = "3,959";
  		
- 		distance = "92,960,000";
+ 		distance = "9.296 x 10^7";
  		 		
  	}
 	

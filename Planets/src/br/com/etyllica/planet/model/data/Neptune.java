@@ -11,7 +11,7 @@ public class Neptune extends DataAstro {
  		
  		radius = "15,299";
  		
- 		distance = "2,798,000,000";
+ 		distance = "2.798 x 10^9";
 
  	}
 	

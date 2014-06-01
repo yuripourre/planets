@@ -11,7 +11,7 @@ public class Pluto extends DataAstro {
  		 		
  		radius = "715";
  		
- 		distance = "3,670,000,000";
+ 		distance = "3.670 x 10^9";
  	}
 	
 	

@@ -11,7 +11,7 @@ public class Saturn extends DataAstro {
  		
  		radius = "36,184";
 		
- 		distance = "890,700,000";
+ 		distance = "8.907 x 10^8";
  		 		
  	}
 	

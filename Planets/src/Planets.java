@@ -21,7 +21,9 @@ public class Planets extends Luvia {
 	
 	@Override
 	public ApplicationGL startApplication() {
-				
+		
+		//setUndecorated(true);
+		
 		return new PlanetsScene(w, h);
 		
 	}

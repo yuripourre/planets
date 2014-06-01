@@ -84,7 +84,7 @@ public class PlanetsScene extends ApplicationGL {
 
 		System.out.println("Load");
 		
-		dataPanel = new LeftPanel(10, 55, 410, 230);
+		dataPanel = new LeftPanel(10, 55, 390, 230);
 				
 		int size = 100;
 
@@ -278,15 +278,20 @@ public class PlanetsScene extends ApplicationGL {
 		int length = currentPlanet.getData().getMass().length();
 		
 		String mass = currentPlanet.getData().getMass().substring(0, length-2);
-		String exponent = currentPlanet.getData().getMass().substring(length-2, length);
+		String massExponent = currentPlanet.getData().getMass().substring(length-2, length);
 		
-		g.drawStringExponentShadow(mass, exponent, 200+offsetX, 20+offsetY);
+		g.drawStringExponentShadow(mass, massExponent, 200+offsetX, 20+offsetY);
 		
 		g.drawShadow(offsetX, 60+offsetY, "Radius (miles): ");
 		g.drawShadow(200+offsetX, 60+offsetY, currentPlanet.getData().getRadius());
 		
+		length = currentPlanet.getData().getDistance().length();
+		
+		String distance = currentPlanet.getData().getDistance().substring(0, length-1);
+		String distanceExponent = currentPlanet.getData().getDistance().substring(length-1, length);
+		
 		g.drawShadow(offsetX, 100+offsetY, "Distance (miles): ");
-		g.drawShadow(200+offsetX, 100+offsetY, currentPlanet.getData().getDistance());
+		g.drawStringExponentShadow(distance, distanceExponent, 200+offsetX, 100+offsetY);
 		
 	}
 		

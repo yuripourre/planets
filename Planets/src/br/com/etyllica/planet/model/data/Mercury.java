@@ -11,7 +11,7 @@ public class Mercury extends DataAstro {
  		
  		radius = "1,516";
  		
- 		distance = "35,980,000";
+ 		distance = "3.598 x 10^7";
  		 		
  	}
 	

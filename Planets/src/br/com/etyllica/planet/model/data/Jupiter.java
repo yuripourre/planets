@@ -11,7 +11,7 @@ public class Jupiter extends DataAstro {
  		
  		radius = "43,441";
  		
- 		distance = "483,800,000";
+ 		distance = "4.838 x 10^8";
  		
 	}
 	

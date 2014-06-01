@@ -11,7 +11,7 @@ public class Mars extends DataAstro {
  		
  		radius = "2,106";
  		
- 		distance = "141,600,000";
+ 		distance = "1.416 x 10^8";
  		
 	}
 	

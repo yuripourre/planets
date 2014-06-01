@@ -11,7 +11,7 @@ public class Venus extends DataAstro{
  		
  		radius = "3,760";
  		
- 		distance = "67,240,000";
+ 		distance = "6.724 x 10^7";
  		
 	}
 

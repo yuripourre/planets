@@ -11,7 +11,7 @@ public class Uranus extends DataAstro {
  		
  		radius = "15,759";
 		
- 		distance = "1,787,000,000";
+ 		distance = "1.787 x 10^9";
  		
 	}
 	
