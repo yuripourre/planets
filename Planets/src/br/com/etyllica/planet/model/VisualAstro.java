@@ -4,8 +4,6 @@ import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 import javax.media.opengl.glu.GLUquadric;
 
-import org.jgl.GLAUX;
-
 import br.com.etyllica.planet.model.data.DataAstro;
 import br.com.luvia.linear.Point3D;
 import br.com.luvia.loader.TextureLoader;
@@ -18,7 +16,7 @@ public class VisualAstro extends Point3D {
 	
 	private double radius;
 	
-	private Texture map;
+	private Texture texture;
 	
 	private DataAstro data;
 		
@@ -29,7 +27,7 @@ public class VisualAstro extends Point3D {
 		
 		this.radius = radius;
 		
-		map = TextureLoader.getInstance().loadTexture(mapPath);
+		texture = TextureLoader.getInstance().loadTexture(mapPath);
 		
 	}
 	
@@ -53,8 +51,8 @@ public class VisualAstro extends Point3D {
 		glu.gluQuadricTexture(sphere, true);
 		glu.gluQuadricNormals(sphere, GLU.GLU_SMOOTH);
 		
-		map.enable(gl);
-		map.bind(gl);
+		texture.enable(gl);
+		texture.bind(gl);
 		  		
 		// draw a sphere
         gl.glPushMatrix();                                
@@ -63,25 +61,10 @@ public class VisualAstro extends Point3D {
             glu.gluSphere(sphere, radius, 32, 32);
         gl.glPopMatrix();
 		
-        map.disable(gl);
+        texture.disable(gl);
 		
 	}
 	
-	public void draw(GLAUX gl) {
-		
-		//Enable texture
-		  		
-		// draw a sphere
-        gl.glPushMatrix();                                
-            gl.glTranslated(x, y, z);
-            gl.glRotatef(-90, 1, 0, 0);            
-            gl.auxSolidSphere(radius);
-        gl.glPopMatrix();
-		
-        //Disable texture
-		
-	}
-
 	public DataAstro getData() {
 		return data;
 	}
@@ -89,5 +72,13 @@ public class VisualAstro extends Point3D {
 	public void setData(DataAstro data) {
 		this.data = data;
 	}
-	
+
+	public Texture getTexture() {
+		return texture;
+	}
+
+	public void setTexture(Texture texture) {
+		this.texture = texture;
+	}
+		
 }
