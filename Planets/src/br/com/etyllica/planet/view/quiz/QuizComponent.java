@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.Set;
 
 import br.com.etyllica.core.Drawable;
+import br.com.etyllica.core.event.Action;
+import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.button.RoundCornerButton;
@@ -27,6 +29,8 @@ public class QuizComponent implements Drawable {
 	private RightPanel quizPanel;
 	
 	private RoundCornerButton[] options;
+	
+	private Set<Integer> indexes = new HashSet<Integer>();
 	
 	private Answer[] labels;
 	
@@ -66,6 +70,7 @@ public class QuizComponent implements Drawable {
 		
 		for(RoundCornerButton option: options) {
 			option.setRoundness(20);
+			option.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "generateQuestion"));
 		}
 		
 		labels = new Answer[9];
@@ -84,19 +89,19 @@ public class QuizComponent implements Drawable {
 		generateQuestion();		
 		
 	}
-	
-	public void generateQuestion() {
 		
-		title = "Which one has the";
-		title2 = "biggest mass?";
+	public void generateQuestion() {
+				
+		indexes.clear();
 		
 		Random random = new Random();
-		
-		Set<Integer> indexes = new HashSet<Integer>();
-		
+						
 		while(indexes.size()<3) {
 			indexes.add(random.nextInt(labels.length));
 		}
+
+		title = "Which one has the";
+		title2 = "biggest mass?";
 		
 		int count = 0;
 		
