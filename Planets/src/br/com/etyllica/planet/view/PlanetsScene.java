@@ -16,6 +16,8 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.loader.FontLoader;
+import br.com.etyllica.gui.Button;
+import br.com.etyllica.gui.View;
 import br.com.etyllica.planet.model.VisualAstro;
 import br.com.etyllica.planet.model.data.Earth;
 import br.com.etyllica.planet.model.data.Jupiter;
@@ -70,8 +72,8 @@ public class PlanetsScene extends ApplicationGL {
 	
 	private LeftPanel dataPanel;
 	
-	private RightPanel quizPanel;
-	
+	private QuizComponent quiz;
+		
 	public PlanetsScene(int w, int h) {
 		super(w, h);
 		
@@ -85,11 +87,7 @@ public class PlanetsScene extends ApplicationGL {
 		System.out.println("Load");
 		
 		dataPanel = new LeftPanel(10, 55, 410, 230);
-		
-		int panelW = 300;
-		
-		quizPanel = new RightPanel(w-panelW-10, 60, panelW, h-60-30);
-		
+				
 		int size = 100;
 
 		selection = new Selection(w/2-size/2, h/2-size/2, size, size);
@@ -112,6 +110,8 @@ public class PlanetsScene extends ApplicationGL {
 	@Override
 	public void init(GLAutoDrawable drawable) {
 		
+		quiz = new QuizComponent(w, h);
+		
 		GL2 gl = drawable.getGL().getGL2();
 				
 		gl.glHint( GL.GL_LINE_SMOOTH_HINT, GL.GL_NICEST ); 
@@ -124,65 +124,69 @@ public class PlanetsScene extends ApplicationGL {
 				
 		loadPlanets();
 		
+		currentPlanetIndex = 4;
+		
 		currentPlanet = planets.get(currentPlanetIndex);
 		
 		loading = 10;
+
+		for(View optionButton: quiz.getOptions()) {
+			this.add(optionButton);
+		}
 
 	}
 	
 	private void loadPlanets() {
 		
-		VisualAstro mercury = new VisualAstro("Mercury", 0.1516, "mercurymap.jpg"); //1,516 miles
+		VisualAstro mercury = new VisualAstro("Mercury", 0.1516, "texture/mercurymap.jpg"); //1,516 miles
 		
 		mercury.setX(3.598);//35,980,000 miles
 		mercury.setData(new Mercury());
 		
-		VisualAstro venus = new VisualAstro("Venus", 0.3760, "venusmap.jpg"); //3,760 miles
+		VisualAstro venus = new VisualAstro("Venus", 0.3760, "texture/venusmap.jpg"); //3,760 miles
 		
 		venus.setX(6.7240);//67,240,000 miles miles
 		venus.setData(new Venus());
 		
-		VisualAstro earth = new VisualAstro("Earth", 0.3959, "earthmap1k.jpg"); //3,959 miles
+		VisualAstro earth = new VisualAstro("Earth", 0.3959, "texture/earthmap1k.jpg"); //3,959 miles
 		
 		earth.setX(9.296);//92,960,000 miles
 		earth.setData(new Earth());
 		
-		VisualAstro mars = new VisualAstro("Mars", 0.2106, "mars_1k_color.jpg"); //2,106 miles
+		VisualAstro mars = new VisualAstro("Mars", 0.2106, "texture/mars_1k_color.jpg"); //2,106 miles
 
 		mars.setX(14.16);//141,600,000 miles
 		mars.setData(new Mars());
 		
-		VisualAstro jupiter = new VisualAstro("Jupiter", 4.3441, "jupitermap.jpg"); //43,441 miles
-		
+		VisualAstro jupiter = new VisualAstro("Jupiter", 4.3441, "texture/jupitermap.jpg"); //43,441 miles
+				
 		jupiter.setX(48.38);//483,800,000 miles
 		jupiter.setData(new Jupiter());
 		
-		VisualAstro saturn = new VisualAstro("Saturn", 3.6184, "saturnmap.jpg"); //36,184 miles
+		VisualAstro saturn = new VisualAstro("Saturn", 3.6184, "texture/saturnmap.jpg"); //36,184 miles
 		
 		saturn.setX(89.07);//890,700,000 miles
 		saturn.setData(new Saturn());
 		
-		VisualAstro uranus = new VisualAstro("Uranus", 1.5759, "uranusmap.jpg"); //15,759 miles
+		VisualAstro uranus = new VisualAstro("Uranus", 1.5759, "texture/uranusmap.jpg"); //15,759 miles
 		
 		uranus.setX(187.7);//1,787,000,000 miles
 		uranus.setData(new Uranus());
 		
-		VisualAstro neptune = new VisualAstro("Netptune", 1.5299, "neptunemap.jpg");//15,299 miles
+		VisualAstro neptune = new VisualAstro("Netptune", 1.5299, "texture/neptunemap.jpg");//15,299 miles
 		
 		neptune.setX(279.8);//2,798,000,000 miles
 		neptune.setData(new Neptune());
 		
-		VisualAstro pluto = new VisualAstro("Pluto", 0.0715, "plutomap1k.jpg");//715 miles
+		VisualAstro pluto = new VisualAstro("Pluto", 0.0715, "texture/plutomap1k.jpg");//715 miles
 		
 		pluto.setX(367.0);//3,670,000,000 miles
 		pluto.setData(new Pluto());
 		
-		sun = new VisualAstro("Sun", 43.2450, "sunmap.jpg");//432,450 miles
+		sun = new VisualAstro("Sun", 43.2450, "texture/sunmap.jpg");//432,450 miles
 		
 		sun.setX(-sun.getRadius());
-		
-		//planets.add(sun);
-		
+						
 		planets.add(pluto);
 		planets.add(neptune);
 		planets.add(uranus);
@@ -192,7 +196,7 @@ public class PlanetsScene extends ApplicationGL {
 		planets.add(earth);
 		planets.add(venus);
 		planets.add(mercury);
-				
+		
 	}
 	
 	protected void lookCamera(GL2 gl) {
@@ -217,7 +221,9 @@ public class PlanetsScene extends ApplicationGL {
 		
 		gl.glClearColor(0,0,0,0);
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT);
-				
+		
+		gl.glColor4f(1f, 1f, 1f, 1f);
+		
 		lookCamera(gl);
 		
 		for(VisualAstro astro: planets) {
@@ -232,7 +238,7 @@ public class PlanetsScene extends ApplicationGL {
 			reshape(drawable, x, y, w, h);
 		}
 
-		gl.glFlush();
+		//gl.glFlush();
 
 	}
 	
@@ -242,6 +248,9 @@ public class PlanetsScene extends ApplicationGL {
 		g.setFont(orbitron);
 		
 		g.setFontSize(28f);
+		
+		g.setColor(SVGColor.GHOST_WHITE);
+		
 		g.write(currentPlanet.getName(), titleArrow);
 				
 		titleArrow.draw(g);
@@ -250,11 +259,9 @@ public class PlanetsScene extends ApplicationGL {
 		
 		dataPanel.draw(g);
 		
-		quizPanel.draw(g);
+		quiz.draw(g);
 		
-		drawData(g);
-		
-		g.setColor(Color.WHITE);
+		drawData(g);	
 	
 	}
 	
@@ -306,7 +313,7 @@ public class PlanetsScene extends ApplicationGL {
 	
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
-
+		
 		if (event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)) {
 			currentPlanetIndex++;
 			currentPlanetIndex%=planets.size();
