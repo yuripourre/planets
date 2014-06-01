@@ -5,6 +5,8 @@ public class Neptune extends DataAstro {
  	public Neptune() {
  		super();
  		
+ 		name = "Neptune";
+ 		
  		mass = "10.243 x 10^25";
  		
  		radius = "15,299";

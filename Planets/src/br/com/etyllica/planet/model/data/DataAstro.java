@@ -2,6 +2,8 @@ package br.com.etyllica.planet.model.data;
 
 public abstract class DataAstro {
 
+	protected String name;
+	
 	//Mass in kg
 	protected String mass;
 	
@@ -13,6 +15,14 @@ public abstract class DataAstro {
 	
 	public DataAstro() {
 		super();
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getMass() {
@@ -38,7 +48,5 @@ public abstract class DataAstro {
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
-	
-	
-	
+		
 }

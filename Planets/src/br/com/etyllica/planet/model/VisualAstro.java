@@ -11,8 +11,6 @@ import br.com.luvia.loader.TextureLoader;
 import com.jogamp.opengl.util.texture.Texture;
 
 public class VisualAstro extends Point3D {
-
-	private String name;
 	
 	private double radius;
 	
@@ -20,11 +18,9 @@ public class VisualAstro extends Point3D {
 	
 	private DataAstro data;
 		
-	public VisualAstro(String name, double radius, String mapPath) {
+	public VisualAstro(double radius, String mapPath) {
 		super();
-		
-		this.name = name;
-		
+				
 		this.radius = radius;
 		
 		texture = TextureLoader.getInstance().loadTexture(mapPath);
@@ -38,9 +34,21 @@ public class VisualAstro extends Point3D {
 	public double getRadius() {
 		return radius;
 	}	
+	
+	public DataAstro getData() {
+		return data;
+	}
 
-	public String getName() {
-		return name;
+	public void setData(DataAstro data) {
+		this.data = data;
+	}
+
+	public Texture getTexture() {
+		return texture;
+	}
+
+	public void setTexture(Texture texture) {
+		this.texture = texture;
 	}
 	
 	public void draw(GL2 gl, GLU glu) {
@@ -63,22 +71,6 @@ public class VisualAstro extends Point3D {
 		
         texture.disable(gl);
 		
-	}
-	
-	public DataAstro getData() {
-		return data;
-	}
-
-	public void setData(DataAstro data) {
-		this.data = data;
-	}
-
-	public Texture getTexture() {
-		return texture;
-	}
-
-	public void setTexture(Texture texture) {
-		this.texture = texture;
 	}
 		
 }

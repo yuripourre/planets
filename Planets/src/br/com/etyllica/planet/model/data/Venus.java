@@ -3,6 +3,9 @@ package br.com.etyllica.planet.model.data;
 public class Venus extends DataAstro{
 	
 	public Venus() {
+		super();
+		
+		name = "Venus";
 		 		
  		mass = "4.8685 x 10^24";
  		
