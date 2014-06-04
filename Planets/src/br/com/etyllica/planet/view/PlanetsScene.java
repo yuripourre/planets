@@ -374,12 +374,13 @@ public class PlanetsScene extends ApplicationGL {
 		mx = event.getX();
 		my = event.getY();
 
-		if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+		if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 			click = true;
 		}
 
-		if(event.onButtonUp(MouseButton.MOUSE_BUTTON_LEFT)){
+		if(event.onButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+			
 			click = false;
 		}
 		
@@ -414,7 +415,7 @@ public class PlanetsScene extends ApplicationGL {
 	
 	private void zoomOut() {
 		
-		if(zoom>1) {
+		if(zoom > 1) {
 			
 			double oldZoom = zoom;
 			

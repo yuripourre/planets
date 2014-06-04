@@ -21,6 +21,7 @@ import br.com.etyllica.planet.model.data.Saturn;
 import br.com.etyllica.planet.model.data.Uranus;
 import br.com.etyllica.planet.model.data.Venus;
 import br.com.etyllica.planet.model.quiz.Answer;
+import br.com.etyllica.planet.model.quiz.QuestionTheme;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.plurality.RightPanel;
 
@@ -39,6 +40,14 @@ public class QuizComponent implements Drawable {
 	private String title;
 	private String title2;
 	
+	private int rightAnswer = 0;
+	
+	private int questionsCount = 0;
+	
+	private int rightAnswersCount = 0;
+	
+	private QuestionTheme theme = QuestionTheme.BIGGEST_MASS;
+		
 	public QuizComponent(int w, int h) {
 		super();
 		
@@ -68,9 +77,13 @@ public class QuizComponent implements Drawable {
 		
 		options[2] = new RoundCornerButton(panelX+offset, optionY+(buttonH+offset)*2, buttonH, buttonH);
 		
+		int count = 0;
+		
 		for(RoundCornerButton option: options) {
 			option.setRoundness(20);
-			option.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "generateQuestion"));
+			option.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "generateQuestion", count));
+			
+			count++;
 		}
 		
 		labels = new Answer[9];
@@ -86,12 +99,25 @@ public class QuizComponent implements Drawable {
 		
 		answers = new Answer[3];
 		
-		generateQuestion();		
+		generateQuestion(-1);
 		
 	}
 		
-	public void generateQuestion() {
+	public void generateQuestion(int answerOption) {
 				
+		if(answerOption >= 0) {
+			
+			questionsCount++;
+			
+			if(answerOption == rightAnswer) {
+				rightAnswersCount++;
+				System.out.println("RIGHT");
+			} else {
+				System.out.println("WRONG!");
+			}
+			
+		}
+		
 		indexes.clear();
 		
 		Random random = new Random();
@@ -104,17 +130,64 @@ public class QuizComponent implements Drawable {
 		title2 = "biggest mass?";
 		
 		int count = 0;
-		
+				
 		for(Integer index: indexes) {
 		
 			options[count].setLabel(labels[index].getLabel());
 			
 			answers[count] = labels[index];
-			
+						
 			count++;
 			
 		}
 		
+		rightAnswer = massIsBigger(answers[0].getData().getMass(), answers[1].getData().getMass(), answers[2].getData().getMass());		
+				
+	}
+	
+	public static int massIsBigger(String mass1, String mass2, String mass3) {
+	
+		if(massIsBigger(mass1, mass2)&&massIsBigger(mass1, mass3)) {
+			return 0;
+		}
+		
+		if(massIsBigger(mass2, mass1)&&massIsBigger(mass2, mass3)) {
+			return 1;
+		}
+				
+		return 2;
+		
+	}
+	
+	public static boolean massIsBigger(String mass1, String mass2) {
+		
+		String[] parts1 = mass1.split(" ");
+		
+		float value1 = Float.parseFloat(parts1[0]);
+				
+		int exponent1 = Integer.parseInt(parts1[2].substring(parts1[2].length()-2));
+		
+		String[] parts2 = mass2.split(" ");
+		
+		float value2 = Float.parseFloat(parts2[0]);
+				
+		int exponent2 = Integer.parseInt(parts2[2].substring(parts2[2].length()-2));
+		
+		if(exponent2>exponent1) {
+			
+			return false;
+			
+		} else if(exponent2 == exponent1) {
+			
+			if(value2 > value1) {
+				
+				return false;
+			}
+			
+		}
+				
+		return true;
+				
 	}
  
 	@Override
@@ -123,6 +196,9 @@ public class QuizComponent implements Drawable {
 		quizPanel.draw(g);
 		
 		g.setColor(Color.WHITE);
+		
+		g.drawShadow(500, 70, rightAnswersCount+"/"+questionsCount);
+		
 		g.drawStringShadow(quizPanel.getX(), quizPanel.getY(), quizPanel.getW(), 60, title, Color.BLACK);
 		g.drawStringShadow(quizPanel.getX(), 60, quizPanel.getW(), 120, title2, Color.BLACK);
 		
