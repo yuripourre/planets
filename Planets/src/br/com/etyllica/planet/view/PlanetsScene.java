@@ -374,21 +374,21 @@ public class PlanetsScene extends ApplicationGL {
 		mx = event.getX();
 		my = event.getY();
 
-		if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 			click = true;
 		}
 
-		if(event.onButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
 			
 			click = false;
 		}
 		
-		if(event.onButtonDown(MouseButton.MOUSE_WHEEL_UP)) {
+		if(event.isButtonDown(MouseButton.MOUSE_WHEEL_UP)) {
 			
 			zoomIn();			
 			
-		}else if(event.onButtonDown(MouseButton.MOUSE_WHEEL_DOWN)) {
+		}else if(event.isButtonDown(MouseButton.MOUSE_WHEEL_DOWN)) {
 			
 			zoomOut();
 			

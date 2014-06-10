@@ -16,9 +16,9 @@ public class Planets extends Luvia {
 
 		Planets engine = new Planets(1024,576);
 		engine.init();
-
+		
 	}
-	
+		
 	@Override
 	public ApplicationGL startApplication() {
 		
