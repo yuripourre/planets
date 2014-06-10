@@ -130,7 +130,7 @@ public class QuizComponent implements Drawable {
 		if(theme == QuestionTheme.BIGGEST_MASS) {
 
 			title = "Which one has the";
-			title2 = "biggest mass?";			
+			title2 = "greatest mass?";			
 		}
 
 		indexes.clear();
