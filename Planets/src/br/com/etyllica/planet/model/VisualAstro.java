@@ -4,8 +4,8 @@ import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 import javax.media.opengl.glu.GLUquadric;
 
+import br.com.abby.linear.Point3D;
 import br.com.etyllica.planet.model.data.DataAstro;
-import br.com.luvia.linear.Point3D;
 import br.com.luvia.loader.TextureLoader;
 
 import com.jogamp.opengl.util.texture.Texture;

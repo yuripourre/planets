@@ -9,10 +9,13 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 
+import br.com.abby.linear.Point3D;
+import br.com.abby.util.CameraGL;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.gui.View;
@@ -31,10 +34,7 @@ import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.plurality.LeftPanel;
 import br.com.etyllica.theme.plurality.Selection;
 import br.com.etyllica.theme.plurality.TitleArrow;
-import br.com.etyllica.util.SVGColor;
 import br.com.luvia.core.ApplicationGL;
-import br.com.luvia.linear.Point3D;
-import br.com.luvia.util.CameraGL;
 
 public class PlanetsScene extends ApplicationGL {
 		

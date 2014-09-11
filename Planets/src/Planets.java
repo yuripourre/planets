@@ -21,6 +21,10 @@ public class Planets extends Luvia {
 		
 	@Override
 	public ApplicationGL startApplication() {
+				
+		String path = Planets.class.getResource("").toString();
+		
+		luviaCore.setUrl(path+"../");
 		
 		//setUndecorated(true);
 		
