@@ -1,6 +1,6 @@
 import br.com.etyllica.planet.view.PlanetsScene;
 import br.com.luvia.Luvia;
-import br.com.luvia.core.ApplicationGL;
+import br.com.luvia.core.context.ApplicationGL;
 
 
 public class Planets extends Luvia {
@@ -21,10 +21,8 @@ public class Planets extends Luvia {
 		
 	@Override
 	public ApplicationGL startApplication() {
-				
-		String path = Planets.class.getResource("").toString();
 		
-		luviaCore.setUrl(path+"../");
+		initialSetup("../../");
 		
 		//setUndecorated(true);
 		

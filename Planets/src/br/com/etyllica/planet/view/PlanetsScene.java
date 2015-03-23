@@ -34,7 +34,8 @@ import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.plurality.LeftPanel;
 import br.com.etyllica.theme.plurality.Selection;
 import br.com.etyllica.theme.plurality.TitleArrow;
-import br.com.luvia.core.ApplicationGL;
+import br.com.luvia.core.context.ApplicationGL;
+import br.com.luvia.core.video.Graphics3D;
 
 public class PlanetsScene extends ApplicationGL {
 		
@@ -75,8 +76,7 @@ public class PlanetsScene extends ApplicationGL {
 	public PlanetsScene(int w, int h) {
 		super(w, h);
 		
-		camera = new CameraGL(7, 5, 57);
-		
+		camera = new CameraGL(7, 5, 57);		
 	}
 	
 	@Override
@@ -97,7 +97,7 @@ public class PlanetsScene extends ApplicationGL {
 		ThemeManager.getInstance().getTheme().setPanelColor(new Color(0xff, 0xff, 0xff, 0x80));
 				
 		loading = 88;
-		loadingPhrase = "Loading Font...";
+		loadingInfo = "Loading Font...";
 		orbitron = FontLoader.getInstance().loadFont("Orbitron Medium.ttf");		
 		
 		loading = 100;
@@ -106,7 +106,7 @@ public class PlanetsScene extends ApplicationGL {
 
 
 	@Override
-	public void init(GLAutoDrawable drawable) {
+	public void init(Graphics3D drawable) {
 		
 		quiz = new QuizComponent(w, h);
 		
@@ -118,7 +118,7 @@ public class PlanetsScene extends ApplicationGL {
 		gl.glEnable( GL2.GL_POLYGON_SMOOTH ); 
 		gl.glEnable( GL.GL_MULTISAMPLE );
 		
-		loadingPhrase = "Loading 3d stuff...";
+		loadingInfo = "Loading 3d stuff...";
 				
 		loadPlanets();
 		
@@ -211,7 +211,7 @@ public class PlanetsScene extends ApplicationGL {
 	}
 	
 	@Override
-	public void display(GLAutoDrawable drawable) {
+	public void display(Graphics3D drawable) {
 		
 		float orbitDegrees = ((720*mx)/w)-360;
 		
@@ -296,7 +296,7 @@ public class PlanetsScene extends ApplicationGL {
 	}
 		
 	@Override
-	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+	public void reshape(Graphics3D drawable, int x, int y, int width, int height) {
 
 		GL2 gl = drawable.getGL().getGL2();
 
