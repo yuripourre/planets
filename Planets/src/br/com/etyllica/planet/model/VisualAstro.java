@@ -51,26 +51,32 @@ public class VisualAstro extends Point3D {
 		this.texture = texture;
 	}
 	
-	public void draw(GL2 gl, GLU glu) {
+public void draw(GL2 gl, GLU glu) {
 		
 		GLUquadric sphere = glu.gluNewQuadric();
 
 		glu.gluQuadricDrawStyle(sphere, GLU.GLU_FILL);
 		glu.gluQuadricTexture(sphere, true);
 		glu.gluQuadricNormals(sphere, GLU.GLU_SMOOTH);
-		
+		gl.glTexGeni(GL2.GL_S, GL2.GL_TEXTURE_GEN_MODE, GL2.GL_SPHERE_MAP);
+        gl.glTexGeni(GL2.GL_T, GL2.GL_TEXTURE_GEN_MODE, GL2.GL_SPHERE_MAP);
+        
+        gl.glEnable(GL2.GL_TEXTURE_GEN_S);  // Enable Sphere Mapping
+        gl.glEnable(GL2.GL_TEXTURE_GEN_T);  // Enable Sphere Mapping
+				
 		texture.enable(gl);
 		texture.bind(gl);
 		  		
 		// draw a sphere
         gl.glPushMatrix();                                
             gl.glTranslated(x, y, z);
-            gl.glRotatef(-90, 1, 0, 0);            
-            glu.gluSphere(sphere, radius, 32, 32);
+            glu.gluSphere(sphere, radius, 48, 48);            
         gl.glPopMatrix();
 		
         texture.disable(gl);
 		
+        gl.glDisable(GL2.GL_TEXTURE_GEN_S);  // Disable Sphere Mapping
+        gl.glDisable(GL2.GL_TEXTURE_GEN_T);  // Disable Sphere Mapping
 	}
 		
 }
